@@ -1,0 +1,4 @@
+*.txt
+videos/*.mp4
+images/
+*.json

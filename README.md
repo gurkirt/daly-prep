@@ -20,4 +20,4 @@ There is another function in Extraction.py, saveVidInfo uses ffprobe to get dura
 
 Basically, it relate time to frame numbers, as the annotation are provided in time, not in frame numbers/indexes. So using these tools you use framebased approcahes to train your methods.
 
-If founf any then please report it me at guru094@gmail.com
+If you find any bufg, please let me know at guru094@gmail.com

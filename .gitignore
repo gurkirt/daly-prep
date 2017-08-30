@@ -3,3 +3,7 @@ videos/*.mp4
 images/
 *.json
 motion-images/
+daly_images/
+rgb-images/
+brox-images/
+hfiles/daly*

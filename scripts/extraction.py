@@ -2,7 +2,6 @@
 Author: Gurkirt Singh
 Date: 20:08:2016
 
-Main purpose of this script to help produce framelevel annotations for DALY dataset
 This script helps to extract frames from video and store useful info about videos.
 
 '''
@@ -14,13 +13,16 @@ actions = ['ApplyingMakeUpOnLips', 'BrushingTeeth', 'CleaningFloor', 'CleaningWi
 
 basedir = '../'; # you chaneg to the place whre you videos and images should be.
 
-def extractframes(vids): # take all .mp4 videos and extract frames using ffmpeg
+def extractframes(vids,fps): # take all .mp4 videos and extract frames using ffmpeg
     for vid in vids:
         vidfile = basedir+'videos/'+vid+'.mp4'
         imgdir = basedir+'images/'+vid+'/'
         if not os.path.isdir(imgdir):
             os.mkdir(imgdir)
-            cmd = 'ffmpeg -i {} -qscale:v 5 {}%05d.jpg'.format(vidfile,imgdir); #-vsync 0
+            if fps>0:
+                cmd = 'ffmpeg -i {} -qscale:v 5 -r {} {}%05d.jpg'.format(vidfile,fps,imgdir); #-vsync 0
+            else:
+                cmd = 'ffmpeg -i {} -qscale:v 5 {}%05d.jpg'.format(vidfile,imgdir); #-vsync 0
             # PNG format is very storage heavy so I choose jpg.
             # images will be generated in JPG format with quality scale = 5; you can adjust according to you liking 
             # In appearence it doen't look that deblurred as opposed to default settings by ffmpeg
@@ -70,7 +72,8 @@ if __name__ == '__main__':
     vids = [d.rstrip('\n') for d in vids]  # remove \n
     
     ############################
-    #extractframes(vids)
+    fps = 25; # set fps = 0 if you want to extract at original frame rate
+    extractframes(vids,fps)
     ###########################
     
     saveVidInfo(vids)
